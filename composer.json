@@ -1,0 +1,25 @@
+{
+    "name": "ging-dev/nette-eloquent",
+    "description": "Eloquent ORM for Nette Framework",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "ging-dev",
+            "email": "gingdz11012001@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "illuminate/database": "^8.44",
+        "illuminate/events": "^8.44"
+    },
+    "require-dev": {
+        "nette/utils": "^3.2",
+        "tracy/tracy": "^2.8",
+        "nette/di": "^3.0"
+    },
+    "autoload": {
+        "classmap": ["src/"]
+    }
+}

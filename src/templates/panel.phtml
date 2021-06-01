@@ -1,0 +1,17 @@
+<h1>SQL Queries</h1>
+<div class="tracy-inner tracy-Eloquent">
+  <table>
+    <tr>
+      <th>SQL</th>
+      <th>Bindings</th>
+      <th>Time (ms)</th>
+    </tr>
+    <?php foreach($queries as $query): ?>
+      <tr>
+        <td><?= $query->sql ?></td>
+        <td><pre><?= implode(', ', $query->bindings) ?></pre></td>
+        <td><?= $query->time ?></td>
+      </tr>
+    <?php endforeach; ?>
+  </table>
+</div>
