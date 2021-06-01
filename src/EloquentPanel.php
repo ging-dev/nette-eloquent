@@ -12,6 +12,8 @@ use Tracy\IBarPanel;
 
 class EloquentPanel implements IBarPanel
 {
+    private $totalTime = 0;
+
     private $queries = [];
 
     public function register(Manager $connection)
@@ -20,18 +22,15 @@ class EloquentPanel implements IBarPanel
         $connection->connection()->setEventDispatcher(new Dispatcher());
         $connection->connection()->listen(function ($query) {
             $this->queries[] = $query;
+            $this->totalTime += $query->time;
         });
     }
 
     public function getTab()
     {
-        $count = count($this->queries);
-
-        if (!$count) {
-            return;
-        }
-
-        return Helpers::capture(function () use ($count) {
+        return Helpers::capture(function () {
+            $count = count($this->queries);
+            $totalTime = $this->totalTime;
             require __DIR__.'/templates/tab.phtml';
         });
     }
