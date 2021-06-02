@@ -23,7 +23,8 @@ class EloquentExtension extends CompilerExtension
 
         if ($container->parameters['debugMode']) {
             $panel = $container->addDefinition($this->prefix('panel'))
-                ->setFactory(EloquentPanel::class);
+                ->setFactory(EloquentPanel::class)
+                ->setAutowired(false);
             $connection->addSetup([$panel, 'register'], [$connection]);
         }
     }
