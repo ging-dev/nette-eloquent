@@ -38,7 +38,9 @@ class EloquentPanel implements IBarPanel
     public function getPanel()
     {
         return Helpers::capture(function () {
-            $queries = $this->queries;
+            if (!$queries = $this->queries) {
+                return;
+            }
             require __DIR__.'/templates/panel.phtml';
         });
     }
