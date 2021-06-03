@@ -28,23 +28,23 @@ declare(strict_types=1);
 
 namespace App\Presenters;
 
-use Illuminate\Database\Capsule\Manager;
+use Illuminate\Database\Connection;
 use Nette;
 
 
 final class HomepagePresenter extends Nette\Application\UI\Presenter
 {
-    /** @var Manager */
+    /** @var Connection */
     protected $database;
 
-    public function injectDatabase(Manager $database) {
+    public function injectDatabase(Connection $database) {
         $this->database = $database;
     }
 
     public function actionDefault()
     {
-        $this->database->schema()->drop('users');
-        $this->database->schema()->create('users', function ($table) {
+        $this->database->getSchemaBuilder()->drop('users');
+        $this->database->getSchemaBuilder()->create('users', function ($table) {
             $table->increments('id');
             $table->string('name')->unique();
         });
