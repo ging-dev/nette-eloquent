@@ -10,7 +10,7 @@ composer require ging-dev/nette-eloquent
 ```
 
 ## Configuration
-```
+```neon
 extensions:
     eloquent: Gingdev\NetteExtension\EloquentExtension
 
