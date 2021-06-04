@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Gingdev\NetteExtension;
 
 use Illuminate\Database\Capsule\Manager;
+use Illuminate\Events\Dispatcher;
 use Nette\DI\CompilerExtension;
 use Nette\Schema\Expect;
 use Nette\Schema\Schema;
@@ -30,7 +31,7 @@ class EloquentExtension extends CompilerExtension
 
         $manager = $container->addDefinition($this->prefix('manager'))
             ->setFactory(Manager::class)
-            ->addSetup('setAsGlobal')
+            ->addSetup('setEventDispatcher', [new Dispatcher()])
             ->addSetup('bootEloquent')
             ->setAutowired(true);
 
@@ -56,5 +57,7 @@ class EloquentExtension extends CompilerExtension
 
             $connection->addSetup([$panel, 'register'], [$connection, $name]);
         }
+
+        $this->initialization->addBody('$this->getService(?)->setAsGlobal();', [$this->prefix('manager')]);
     }
 }

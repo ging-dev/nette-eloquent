@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Gingdev\NetteExtension;
 
 use Illuminate\Database\Connection;
-use Illuminate\Events\Dispatcher;
 use Nette\Utils\Helpers;
 use Tracy\Debugger;
 use Tracy\IBarPanel;
@@ -21,7 +20,6 @@ class EloquentPanel implements IBarPanel
     public function register(Connection $connection, string $name)
     {
         Debugger::getBar()->addPanel($this);
-        $connection->setEventDispatcher(new Dispatcher());
         $connection->listen(function ($query) {
             $this->queries[] = $query;
             $this->totalTime += $query->time;
