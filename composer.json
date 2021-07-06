@@ -12,7 +12,8 @@
     "minimum-stability": "stable",
     "require": {
         "illuminate/database": "^8.44",
-        "illuminate/events": "^8.44"
+        "illuminate/events": "^8.44",
+        "illuminate/filesystem": "^8.49"
     },
     "require-dev": {
         "nette/utils": "^3.2",
